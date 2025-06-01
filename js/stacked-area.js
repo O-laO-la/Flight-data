@@ -33,14 +33,6 @@ d3.csv("data/stacked_area_top10.csv").then(function(data) {
     const chartArea = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // 堆叠生成器
-    const stack = d3.stack()
-        .keys(countries)
-        .order(d3.stackOrderNone)
-        .offset(d3.stackOffsetNone);
-
-    const series = stack(stackedData);
-
     // X轴
     const x = d3.scaleTime()
         .domain(d3.extent(stackedData, d => d.month))
@@ -58,7 +50,7 @@ d3.csv("data/stacked_area_top10.csv").then(function(data) {
 
     // Y轴
     const y = d3.scaleLinear()
-        .domain([0, d3.max(series, s => d3.max(s, d => d[1]))])
+        .domain([0, d3.max(countries, c => d3.max(stackedData, d => d[c]))])
         .range([height, 0]);
     chartArea.append("g")
         .call(d3.axisLeft(y));
@@ -82,67 +74,112 @@ d3.csv("data/stacked_area_top10.csv").then(function(data) {
         .style("display", "none")
         .style("z-index", 10);
 
-    // 绘制堆叠面积
+    // 绘制堆叠面积的 area 生成器
     const area = d3.area()
         .x(d => x(d.data.month))
         .y0(d => y(d[0]))
         .y1(d => y(d[1]));
 
-    chartArea.selectAll(".layer")
-        .data(series)
-        .join("path")
-        .attr("class", "layer")
-        .attr("fill", d => color(d.key))
-        .attr("d", area)
-        .attr("opacity", 0.85)
-        .on("mousemove", function(event, d) {
-            // 获取鼠标位置对应的月份
-            const [mx] = d3.pointer(event, this);
-            const xm = x.invert(mx);
-            // 找到最近的月份索引
-            const idx = d3.bisector(e => e.data.month).left(d, xm, 1);
-            const datum = d[idx - 1];
-            if (!datum) return;
-            tooltip
-                .style("display", "block")
-                .html(
-                    `<strong>国家：</strong>${d.key}<br/>
-                    <strong>月份：</strong>${d3.timeFormat("%Y-%m")(datum.data.month)}<br/>
-                    <strong>航班数：</strong>${datum.data[d.key]}`
-                )
-                .style("left", (event.pageX + 15) + "px")
-                .style("top", (event.pageY - 28) + "px");
-        })
-        .on("mouseleave", function() {
-            tooltip.style("display", "none");
-        });
+    // 新增：用于记录隐藏的国家
+    const hiddenCountries = new Set();
+
+    // 渲染堆叠面积图函数
+    function renderStackedArea() {
+        // 过滤掉隐藏的国家
+        const visibleCountries = countries.filter(c => !hiddenCountries.has(c));
+        const stack = d3.stack()
+            .keys(visibleCountries)
+            .order(d3.stackOrderNone)
+            .offset(d3.stackOffsetNone);
+
+        const series = stack(stackedData);
+
+        // 重新计算每个月的总和，动态设置y轴domain
+        const maxY = d3.max(stackedData, d =>
+            d3.sum(visibleCountries, c => d[c])
+        );
+        y.domain([0, maxY || 1]); // 防止全隐藏时maxY为0
+
+        // 更新Y轴
+        chartArea.select("g").call(d3.axisLeft(y));
+
+        // 更新面积
+        chartArea.selectAll(".layer")
+            .data(series, d => d.key)
+            .join(
+                enter => enter.append("path")
+                    .attr("class", "layer")
+                    .attr("fill", d => color(d.key))
+                    .attr("opacity", 0.85)
+                    .attr("d", area),
+                update => update
+                    .attr("fill", d => color(d.key))
+                    .attr("d", area),
+                exit => exit.remove()
+            )
+            .on("mousemove", function(event, d) {
+                const [mx] = d3.pointer(event, this);
+                const xm = x.invert(mx);
+                const idx = d3.bisector(e => e.data.month).left(d, xm, 1);
+                const datum = d[idx - 1];
+                if (!datum) return;
+                tooltip
+                    .style("display", "block")
+                    .html(
+                        `<strong>国家：</strong>${d.key}<br/>
+                        <strong>月份：</strong>${d3.timeFormat("%Y-%m")(datum.data.month)}<br/>
+                        <strong>航班数：</strong>${datum.data[d.key]}`
+                    )
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseleave", function() {
+                tooltip.style("display", "none");
+            });
+    }
 
     // 图例
     const legendHeight = height; // 图表高度
     const legendItemCount = countries.length;
     const legendItemHeight = 24; // 单个图例项高度（含间距）
     const legendSpacing = legendHeight / legendItemCount; // 等距分布
-    
+
     const legend = svg.append("g")
         .attr("class", "legend-group")
         .attr("transform", `translate(${width + margin.left + 30},${margin.top})`);
-    
-    legend.selectAll(".legend")
+
+    const legendItems = legend.selectAll(".legend")
         .data(countries)
         .enter().append("g")
         .attr("class", "legend")
         .attr("transform", (d, i) => `translate(0,${i * legendSpacing})`)
-        .call(g => {
-            g.append("rect")
-                .attr("width", 18)
-                .attr("height", 18)
-                .attr("fill", d => color(d));
-            g.append("text")
-                .attr("x", 24)
-                .attr("y", 13)
-                .text(d => d)
-                .style("font-size", "16px");
+        .style("cursor", "pointer")
+        .on("click", function(event, d) {
+            // 切换隐藏状态
+            if (hiddenCountries.has(d)) {
+                hiddenCountries.delete(d);
+            } else {
+                hiddenCountries.add(d);
+            }
+            // 更新图例样式
+            d3.select(this).classed("legend-disabled", hiddenCountries.has(d));
+            // 重新渲染
+            renderStackedArea();
         });
+
+    legendItems.append("rect")
+        .attr("width", 18)
+        .attr("height", 18)
+        .attr("fill", d => color(d));
+
+    legendItems.append("text")
+        .attr("x", 24)
+        .attr("y", 13)
+        .text(d => d)
+        .style("font-size", "16px");
+
+    // 初始渲染
+    renderStackedArea();
 
     // 缩放功能
     const zoom = d3.zoom()

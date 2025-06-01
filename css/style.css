@@ -63,3 +63,44 @@ section#chord-diagram {
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     padding: 24px 0 32px 0;
 }
+
+.project-intro {
+    max-width: 900px;
+    margin: 32px auto 40px auto;
+    background: #f4f8fb;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    padding: 32px 38px 28px 38px;
+    font-size: 1.12rem;
+    color: #1a202c;
+    line-height: 1.9;
+}
+.project-intro h2 {
+    text-align: center;
+    color: #2563eb;
+    margin-bottom: 18px;
+}
+.project-intro ul {
+    margin: 16px 0 16px 28px;
+}
+
+.chart-analysis h3 {
+    text-align: center;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-size: 1.25rem;
+    color: #2563eb;
+}
+.chart-analysis h4 {
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-size: 1.08rem;
+    color: #1e293b;
+}
+.chart-analysis ul {
+    margin: 0 0 10px 22px;
+    padding-left: 0;
+}
+.chart-analysis li {
+    margin-bottom: 4px;
+}
