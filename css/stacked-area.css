@@ -1,0 +1,17 @@
+#stacked-area-container {
+    background: #fff;
+    border: 1px solid #eee;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.legend-group text {
+    font-size: 16px;
+}
+
+.axis text,
+.axis-label {
+    font-size: 16px;
+}

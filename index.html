@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>疫情期间航班数据可视化</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/stacked-area.css">
+    <link rel="stylesheet" href="css/chord-diagram.css">
+</head>
+<body>
+    <header>
+        <h1>疫情期间航班数据可视化</h1>
+    </header>
+    <main>
+        <section id="stacked-area-chart">
+            <h2>堆叠面积折线图</h2>
+            <div class="chart-container" id="stacked-area-container"></div>
+        </section>
+        <section id="chord-diagram">
+            <h2>弦图</h2>
+            <div class="period-btn-group" style="text-align:center; margin-bottom:16px;">
+                <button class="period-btn" data-period="TP1">疫情前</button>
+                <button class="period-btn" data-period="TP2">疫情前期</button>
+                <button class="period-btn" data-period="TP3">疫情中期</button>
+                <button class="period-btn" data-period="TP4">疫情后期</button>
+            </div>
+            <div class="chart-container" id="chord-diagram-container"></div>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script src="js/stacked-area.js"></script>
+    <script src="js/chord-diagram.js"></script>
+</body>
+</html>

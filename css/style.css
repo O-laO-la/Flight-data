@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    font-size: 18px;
+
+}
+
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.chart-area {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.line-chart,
+.chord-diagram {
+    flex: 1;
+    margin: 0 10px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #35424a;
+    color: #ffffff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+#stacked-area-chart h2,
+#chord-diagram h2 {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 2rem;
+}
+
+section#stacked-area-chart,
+section#chord-diagram {
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 24px 0 32px 0;
+}
