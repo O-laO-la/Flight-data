@@ -80,7 +80,7 @@ d3.csv("data/stacked_area_top10.csv").then(function(data) {
         .y0(d => y(d[0]))
         .y1(d => y(d[1]));
 
-    // 新增：用于记录隐藏的国家
+    // 用于记录隐藏的国家
     const hiddenCountries = new Set();
 
     // 渲染堆叠面积图函数
