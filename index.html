@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>疫情期间航班数据可视化</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/stacked-area.css" />
+    <link rel="stylesheet" href="css/chord-diagram.css" />
+    <link rel="stylesheet" href="css/time-line-chart.css" />
+    <link rel="stylesheet" href="css/spatial-trajectory.css" />
+    <link rel="stylesheet" href="css/flight-heatmap.css" />
+  </head>
+  <body class="has-nav-outline">
+    <!-- Navigation Toggle Button for Mobile -->
+    <button class="nav-toggle" id="nav-toggle">☰</button>
+
+    <!-- Navigation Outline -->
+    <nav class="nav-outline" id="nav-outline">
+      <div class="nav-outline-header">
+        <h3 class="nav-outline-title">页面导航</h3>
+      </div>
+      <ul class="nav-outline-list">
+        <li class="nav-outline-item">
+          <a href="#project-intro" class="nav-outline-link">项目介绍</a>
+        </li>
+        <li class="nav-outline-item">
+          <a href="#stacked-area-chart" class="nav-outline-link"
+            >堆叠面积折线图</a
+          >
+        </li>
+        <li class="nav-outline-item">
+          <a href="#chord-diagram" class="nav-outline-link">弦图</a>
+        </li>
+        <li class="nav-outline-item">
+          <a href="#time-line-chart" class="nav-outline-link">时间折线图</a>
+        </li>
+        <li class="nav-outline-item">
+          <a href="#flight-heatmap" class="nav-outline-link">航班密度热力图</a>
+        </li>
+        <li class="nav-outline-item">
+          <a href="#spatial-trajectory" class="nav-outline-link">空间轨迹图</a>
+        </li>
+      </ul>
+    </nav>
+
+    <header>
+      <h1>疫情期间航班数据可视化</h1>
+      <h2>小组成员：张歆怡 马洪宇 陈妍安 张鼎言</h2>
+    </header>
+    <main>
+      <section class="project-intro" id="project-intro">
+        <p>
+          新冠疫情自2019年底爆发以来，对全球交通运输体系，尤其是航空业造成了前所未有的冲击。作为全球化程度最高的交通方式之一，航空网络在疫情初期几乎陷入停摆状态，随后又经历了长期的波动性恢复过程。这一过程不仅反映了疫情的发展与各国政策的应对节奏，也揭示了全球航空网络在危机冲击下的脆弱性与韧性。
+        </p>
+        <p>
+          本项目以疫情期间全球航班变化为核心研究对象，通过多种数据可视化手段（包括堆叠面积折线图、弦图、航线图等），从宏观趋势、区域差异、国家比较和网络结构等维度出发，系统呈现疫情对全球航空业运行格局的影响。图像数据覆盖多个国家和地区，结合疫情关键时间节点，旨在揭示以下几个关键问题：
+        </p>
+        <ul>
+          <li>疫情对全球航班数量造成了多大冲击？恢复趋势是否同步？</li>
+          <li>各国航线网络在疫情期间如何收缩与重构？</li>
+          <li>哪些国家航空业恢复较快？可能受到哪些因素影响？</li>
+          <li>疫情如何改变了国际航线的连通性与中心结构？</li>
+        </ul>
+        <p>
+          通过本项目的可视化分析，我们不仅能够直观了解疫情对航空运输系统的具体影响，还可为后续的公共危机响应、交通政策制定及航空业韧性提升提供数据支撑和思路启发。
+        </p>
+      </section>
+      <section id="stacked-area-chart">
+        <h2>堆叠面积折线图</h2>
+        <div class="chart-container" id="stacked-area-container"></div>
+        <div class="chart-analysis">
+          <h3>一、整体趋势</h3>
+          <h4>1. 疫情冲击集中爆发期（2020年3月 - 4月）</h4>
+          <p>
+            图中清晰显示出2020年3月至4月各国航班数量出现断崖式下跌，这是全球范围内首次大规模航空停摆。
+          </p>
+          <ul>
+            <li>
+              2020年3月中旬，世界卫生组织（WHO）宣布新冠为“全球大流行病”。
+            </li>
+            <li>
+              各国实施封锁政策、边境管制（如欧洲申根区暂停自由流动），航空业成为最先受创的行业之一。
+            </li>
+            <li>大量航班取消、国际航线中断、航空公司被迫停运或裁员。</li>
+          </ul>
+          <h4>2. 恢复期的波动特征（2020年5月之后）</h4>
+          <p>虽然总体趋势是回升，但整体恢复并非线性，呈现反复震荡。</p>
+          <ul>
+            <li>疫情反复（如2020年末欧洲和印度出现第二波疫情）；</li>
+            <li>不同国家之间疫情控制成效不同，导致国际航班恢复不对称；</li>
+            <li>
+              各国防控政策反复变化（如美国各州之间政策不一致，欧洲国家时常封锁边境）。
+            </li>
+          </ul>
+          <h3>二、各国表现与结构分析</h3>
+          <h4>美国：强劲而持续的恢复动力</h4>
+          <p>图中蓝色面积始终占据主导，说明美国航班数量始终高于其他国家。</p>
+          <ul>
+            <li>美国地广人稀、航空出行是主要交通方式；</li>
+            <li>政策相对宽松、经济重启较早；</li>
+            <li>较早推动国内航班恢复（2020年夏季“解封”）；</li>
+            <li>
+              航空公司采取灵活应对措施（如缩减航线、整合运力、获取财政援助等）。
+            </li>
+          </ul>
+          <h4>欧洲各国：受冲击深、恢复节奏慢</h4>
+          <p>如德国、法国、意大利等航班数量波动剧烈。</p>
+          <ul>
+            <li>多轮疫情爆发，防控政策更为严格；</li>
+            <li>欧盟内政策协调复杂；</li>
+            <li>航空出行更多用于国际短途出差和旅游，受封锁限制影响大。</li>
+          </ul>
+          <h4>亚洲国家：复苏缓慢但相对稳定</h4>
+          <p>日本、韩国等国家航班数量恢复较为平稳，但恢复幅度不如欧美。</p>
+          <ul>
+            <li>政策上更加谨慎，边境管控措施持续时间更长；</li>
+            <li>高铁等替代交通方式发达，减轻了对航空的依赖。</li>
+          </ul>
+          <h4>南半球国家：如澳大利亚、新西兰</h4>
+          <ul>
+            <li>航班数量基数本身就小，下降后恢复非常慢；</li>
+            <li>
+              较长时间内实行“零容忍”政策，对国际航班管制严格（如澳新旅行泡泡的尝试）；
+            </li>
+            <li>体现了地理孤立性与政策谨慎的双重影响。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="chord-diagram">
+        <h2>弦图</h2>
+        <div class="chart-analysis">
+          <h3>弦图原理及作用</h3>
+          <p>
+            弦图通过节点（这里是各个国家）和连接节点的弦来展示数据关系。节点的大小代表航班数，弦的粗细和颜色反映国家间联系的强度和类别，可用于分析不同国家在疫情不同阶段的关联变化。
+          </p>
+        </div>
+        <div
+          class="period-btn-group"
+          style="text-align: center; margin-bottom: 16px"
+        >
+          <button class="period-btn" data-period="TP1">疫情前</button>
+          <button class="period-btn" data-period="TP2">疫情前期</button>
+          <button class="period-btn" data-period="TP3">疫情中期</button>
+          <button class="period-btn" data-period="TP4">疫情后期</button>
+        </div>
+        <div class="chart-container" id="chord-diagram-container"></div>
+        <div class="chart-analysis">
+          <h3>各阶段分析</h3>
+          <h4>疫情前</h4>
+          <li>
+            各国间联系较为紧密，弦的分布相对丰富且粗细较均衡，说明国际间交流频繁，航空运输等往来正常，各国在国际交流网络中联系广泛且程度相近。
+          </li>
+          <h4>疫情前期</h4>
+          <li>
+            部分弦变细，表明一些国家间联系开始减弱，反映出疫情初期各国开始采取限制措施，如减少航班等，国际交流受影响，部分国家间航空往来频次降低。
+          </li>
+          <h4>疫情中期</h4>
+          <li>
+            很多弦进一步变细甚至消失，说明疫情中期各国严格管控，旅行限制、封锁等措施使国际间交流大幅减少，国家间航空联系基本处于低水平状态。
+          </li>
+          <h4>疫情后期</h4>
+          <li>
+            部分弦开始变粗，意味着一些国家间联系逐渐恢复，反映出随着疫情防控形势变化和部分限制措施放宽，国际航空运输等交流活动逐步复苏，但尚未完全恢复到疫情前水平。
+          </li>
+        </div>
+      </section>
+      <section id="time-line-chart">
+        <h2>时间折线图 - 机场航班统计分析</h2>
+
+        <div class="controls">
+          <select id="yearSelect">
+            <option value="2019">2019年</option>
+            <option value="2020">2020年</option>
+            <option value="2021">2021年</option>
+            <option value="2022">2022年</option>
+          </select>
+
+          <select id="originDestinationSelect">
+            <option value="origin">起点机场</option>
+            <option value="destination">终点机场</option>
+          </select>
+
+          <select id="continentSelect"></select>
+        </div>
+
+        <div class="chart-container">
+          <svg id="time-line-svg"></svg>
+        </div>
+        <div id="time-line-legend" class="legend"></div>
+        <div id="time-line-tooltip" class="tooltip"></div>
+      </section>
+      <section id="flight-heatmap">
+        <div class="heatmap-container">
+          <h2>航班密度热力图</h2>
+          <div class="heatmap-controls">
+            <div id="heatmap-date-label" class="heatmap-date-label">Jan-19</div>
+            <div class="heatmap-slider-container">
+              <input
+                type="range"
+                id="heatmap-time-slider"
+                class="heatmap-time-slider"
+                min="0"
+                max="40"
+                value="0"
+              />
+              <div class="heatmap-slider-labels">
+                <span>2019年1月</span>
+                <span>2022年5月</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="heatmap-image-container">
+            <img
+              id="heatmap-display-image"
+              class="heatmap-display-image"
+              src=""
+              alt="航班密度热力图"
+            />
+          </div>
+        </div>
+      </section>
+      <section id="spatial-trajectory">
+        <h2>空间轨迹图 - 航班路线时空演化分析</h2>
+
+        <!-- 控制按钮区域 -->
+        <div class="spatial-controls">
+          <div class="spatial-btn-group">
+            <button class="spatial-btn active" data-view="analysis">
+              趋势分析
+            </button>
+            <button class="spatial-btn" data-view="overview">航线总览</button>
+          </div>
+          <div class="spatial-btn-group" id="spatial-month-buttons">
+            <!-- 月份按钮将通过JavaScript动态生成 -->
+          </div>
+        </div>
+
+        <!-- 图表容器 -->
+        <div class="spatial-chart-container">
+          <!-- 趋势分析视图 -->
+          <div class="spatial-view spatial-analysis-view active">
+            <div class="spatial-analysis-container">
+              <h2>1. 全球航线密度的变化趋势</h2>
+              <h3>（1）疫情前阶段（2019全年-2020年3月）</h3>
+              <p>
+                在疫情前阶段，全球航班网络密集且覆盖广泛，呈现出典型的"多中心-高密度"结构。北美、欧洲和东亚之间连线密集，洲际连接发达，城市间呈高频往返趋势，全球一体化航空格局明显。
+              </p>
+
+              <h3>（2）疫情冲击期（2020年4月）</h3>
+              <p>
+                自2020年4月起，图像明显显示航线密度迅速下降。2020年4月-6月为最低谷时期，4月航班数量不足100万，许多国际航线中断，洲际连接被迫中止。图像中可以观察到许多区域"断网"或仅保留少量内部航线，整体图形呈现碎片化，空间覆盖范围锐减。直至2021年2月，航班数量才恢复到200万。
+              </p>
+
+              <h3>（3）恢复期（2021年3月起）</h3>
+              <p>
+                2021年3月开始，部分航线开始恢复。图像中航线逐渐增加，尤其是中国、美国、欧洲内部等市场航班先于国际航线恢复，显示出"内部航班优先"特征。航线密度未恢复至疫情前水平，但航班数量在逐渐增加。
+              </p>
+
+              <h2>2. 区域连接结构的重组与演化</h2>
+              <p>疫情期间全球航空网络从"全球一体化"退回至"区域自循环"模式。</p>
+              <ul>
+                <li style="color: #e0e0e0">
+                  欧洲、美洲、东亚等地区形成了明显的内部航线网络，但洲际连接严重缩减；
+                </li>
+                <li style="color: #e0e0e0">
+                  跨洲航线，如欧洲-北美、亚洲-美洲航线减少；
+                </li>
+                <li style="color: #e0e0e0">
+                  部分区域如非洲出现航线几近"空白"的现象。
+                </li>
+              </ul>
+              <p>
+                到2021年后期，一些区域间航线开始恢复，但整体上仍未重建疫情前全球航线格局，航线仍是区域内部较多。
+              </p>
+
+              <h2>3. 航线恢复的空间节奏差异</h2>
+              <ul>
+                <li style="color: #e0e0e0">
+                  中国大陆：恢复较早（2020年中期），国内航线优先恢复，网络密度快速回升。
+                </li>
+                <li style="color: #e0e0e0">
+                  美国：国内航线在2020年下半年恢复较快，国际航线恢复相对缓慢。
+                </li>
+                <li style="color: #e0e0e0">
+                  欧洲：内部恢复缓慢且波动大，封锁政策反复导致航线时开时闭。
+                </li>
+                <li style="color: #e0e0e0">
+                  中东：作为过境枢纽恢复较快，保持较强连接能力。
+                </li>
+                <li style="color: #e0e0e0">
+                  非洲、南美：恢复滞后，多月连线稀少，航线网络脆弱。
+                </li>
+              </ul>
+              <p>
+                整体恢复轨迹体现出全球航线从核心区域向边缘区域逐步回升的不均衡格局。
+              </p>
+
+              <h2>4. 总结</h2>
+              <ul>
+                <li style="color: #e0e0e0">
+                  疫情极大冲击了全球航班空间结构，使航空网络由高密度、强连通状态转为低密度、区域化格局。
+                </li>
+                <li style="color: #e0e0e0">
+                  航线密度最小值出现在2020年春季，此后缓慢恢复，洲际连接仍未恢复至2019年水平。
+                </li>
+                <li style="color: #e0e0e0">
+                  航空枢纽结构经历再分化与重组，部分传统国际枢纽功能削弱，一些新枢纽地位上升。
+                </li>
+                <li style="color: #e0e0e0">
+                  区域连接优先于国际连接恢复，全球飞行体系出现"本地化"趋势，反映出疫情背景下航空适应性结构调整。
+                </li>
+                <li style="color: #e0e0e0">
+                  航线恢复呈空间不均衡态势，核心经济体恢复较快，边缘地区仍长期处于低连通状态。
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 航线总览视图 -->
+          <div class="spatial-view spatial-overview-view">
+            <div class="spatial-grid-container" id="spatial-grid-container">
+              <!-- 网格项目将通过JavaScript动态生成 -->
+            </div>
+          </div>
+
+          <!-- 单图显示视图 -->
+          <div class="spatial-view spatial-single-view">
+            <div class="spatial-image-container">
+              <img id="spatial-route-image" src="" alt="航线图" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="js/d3.v7.min.js"></script>
+    <!-- 嵌入的数据文件 -->
+    <script src="js/airport-data.js"></script>
+    <script src="js/heatmap-data.js"></script>
+    <script src="js/chart-data.js"></script>
+    <!-- 可视化组件脚本 -->
+    <script src="js/navigation.js"></script>
+    <script src="js/stacked-area.js"></script>
+    <script src="js/chord-diagram.js"></script>
+    <script src="js/time-line-chart.js"></script>
+    <script src="js/flight-heatmap.js"></script>
+    <script src="js/spatial-trajectory.js"></script>
+  </body>
+</html>
