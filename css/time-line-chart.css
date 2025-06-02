@@ -1,0 +1,373 @@
+/* 时间折线图样式 - 科幻主题 */
+
+/* 时间折线图section样式，与其他section保持一致 */
+section#time-line-chart {
+  max-width: 1400px;
+  margin: 0 auto 60px auto;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.8) 0%,
+    rgba(15, 52, 96, 0.6) 100%
+  );
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(0, 255, 255, 0.15);
+  padding: 40px 30px 50px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+section#time-line-chart::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.8),
+    transparent
+  );
+  animation: topBorderGlow 3s infinite ease-in-out;
+}
+
+@keyframes topBorderGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+section#time-line-chart h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.4),
+    0 0 30px rgba(0, 255, 255, 0.2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+section#time-line-chart h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ffff, transparent);
+  box-shadow: 0 0 10px #00ffff;
+}
+
+/* 控制面板样式 */
+#time-line-chart .controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px 0;
+  gap: 15px;
+  padding: 25px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(26, 26, 46, 0.3) 100%
+  );
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+#time-line-chart select {
+  padding: 12px 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 255, 255, 0.6);
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.8) 0%,
+    rgba(15, 52, 96, 0.6) 100%
+  );
+  backdrop-filter: blur(10px);
+  font-size: 14px;
+  color: #00ffff;
+  cursor: pointer;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+#time-line-chart select:focus {
+  outline: none;
+  border-color: #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6),
+    inset 0 0 10px rgba(0, 255, 255, 0.1);
+}
+
+#time-line-chart select:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.9) 0%,
+    rgba(15, 52, 96, 0.8) 100%
+  );
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+#time-line-chart select option {
+  background: rgba(26, 26, 46, 0.95);
+  color: #00ffff;
+  border: none;
+}
+
+/* SVG 图表容器 */
+#time-line-chart .chart-container {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(26, 26, 46, 0.3) 100%
+  );
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  padding: 30px;
+  margin: 30px 0;
+  box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#time-line-chart svg {
+  width: 100%;
+  max-width: 900px;
+  height: 500px;
+  margin: 0 auto;
+  display: block;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 255, 255, 0.05) 0%,
+    transparent 70%
+  );
+  border-radius: 12px;
+}
+
+/* 坐标轴样式 */
+#time-line-chart .axis-title {
+  font-size: 14px;
+  font-weight: bold;
+  fill: #4ecdc4;
+  font-family: "Rajdhani", sans-serif;
+  text-shadow: 0 0 5px rgba(78, 205, 196, 0.4);
+}
+
+#time-line-chart .x-axis,
+#time-line-chart .y-axis {
+  font-size: 12px;
+  font-family: "Rajdhani", sans-serif;
+}
+
+#time-line-chart .x-axis text,
+#time-line-chart .y-axis text {
+  fill: #4ecdc4;
+  text-shadow: 0 0 3px rgba(78, 205, 196, 0.3);
+}
+
+#time-line-chart .domain {
+  stroke: #00ffff;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.6));
+}
+
+#time-line-chart .tick line {
+  stroke: #00ffff;
+  stroke-opacity: 0.6;
+  filter: drop-shadow(0 0 2px rgba(0, 255, 255, 0.3));
+}
+
+/* 网格线样式 */
+#time-line-chart .grid line {
+  stroke: rgba(0, 255, 255, 0.2);
+  stroke-opacity: 0.7;
+  shape-rendering: crispEdges;
+  stroke-dasharray: 2, 2;
+}
+
+#time-line-chart .grid path {
+  stroke-width: 0;
+}
+
+/* 折线样式 */
+#time-line-chart .line {
+  fill: none;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.6));
+}
+
+#time-line-chart .line:hover {
+  stroke-width: 5px;
+  filter: drop-shadow(0 0 15px rgba(0, 255, 255, 0.8));
+}
+
+/* 焦点线样式 */
+#time-line-chart .focus-line {
+  stroke: #00ffff;
+  stroke-width: 1px;
+  stroke-dasharray: 5, 5;
+  opacity: 0;
+  transition: opacity 0.2s;
+  filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.8));
+}
+
+/* 工具提示样式 */
+#time-line-chart .tooltip,
+#time-line-tooltip {
+  position: absolute;
+  padding: 15px 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.95) 0%,
+    rgba(15, 52, 96, 0.95) 100%
+  );
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 255, 255, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  min-width: 120px;
+  z-index: 1000;
+  color: #e0e0e0;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 500;
+  text-shadow: 0 0 5px rgba(224, 224, 224, 0.3);
+}
+
+/* 图例样式 */
+#time-line-chart .legend,
+#time-line-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 20px;
+  padding: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(26, 26, 46, 0.3) 100%
+  );
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+#time-line-chart .legend-item,
+#time-line-legend .legend-item {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.4) 0%,
+    rgba(15, 52, 96, 0.3) 100%
+  );
+  border: 1px solid rgba(0, 255, 255, 0.3);
+}
+
+#time-line-chart .legend-item:hover,
+#time-line-legend .legend-item:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.6) 0%,
+    rgba(15, 52, 96, 0.5) 100%
+  );
+  border-color: #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+#time-line-chart .legend-color,
+#time-line-legend .legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+}
+
+#time-line-chart .legend-text,
+#time-line-legend .legend-text {
+  font-size: 14px;
+  color: #4ecdc4;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(78, 205, 196, 0.4);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  section#time-line-chart {
+    padding: 25px 20px 35px 20px;
+  }
+
+  section#time-line-chart h2 {
+    font-size: 1.8rem;
+  }
+
+  #time-line-chart .controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  #time-line-chart select {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  #time-line-chart .chart-container {
+    padding: 20px;
+  }
+
+  #time-line-chart svg {
+    height: 400px;
+  }
+
+  #time-line-chart .legend,
+  #time-line-legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #time-line-chart .legend-item,
+  #time-line-legend .legend-item {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
+}

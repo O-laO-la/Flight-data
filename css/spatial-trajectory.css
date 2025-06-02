@@ -1,0 +1,502 @@
+/* 空间轨迹模块样式 */
+
+/* 空间轨迹section样式，与其他section保持一致 */
+section#spatial-trajectory {
+  max-width: 1400px;
+  margin: 0 auto 60px auto;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.8) 0%,
+    rgba(15, 52, 96, 0.6) 100%
+  );
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(0, 255, 255, 0.15);
+  padding: 40px 30px 50px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+section#spatial-trajectory::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.8),
+    transparent
+  );
+  animation: topBorderGlow 3s infinite ease-in-out;
+}
+
+@keyframes topBorderGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+section#spatial-trajectory h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  color: #00ffff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.4),
+    0 0 30px rgba(0, 255, 255, 0.2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+section#spatial-trajectory h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #00ffff, transparent);
+  box-shadow: 0 0 10px #00ffff;
+}
+
+/* 控制按钮区域 */
+.spatial-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 30px 0;
+  gap: 15px;
+  padding: 25px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(26, 26, 46, 0.3) 100%
+  );
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.spatial-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.spatial-btn {
+  font-size: 1rem;
+  padding: 12px 24px;
+  margin: 0;
+  border: 1px solid rgba(0, 255, 255, 0.6);
+  border-radius: 8px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 255, 0.2) 0%,
+    rgba(255, 0, 255, 0.2) 100%
+  );
+  color: #00ffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  min-width: 100px;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.spatial-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.4),
+    transparent
+  );
+  transition: all 0.3s ease;
+}
+
+.spatial-btn:hover::before {
+  left: 100%;
+}
+
+.spatial-btn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 255, 0.3) 0%,
+    rgba(255, 0, 255, 0.3) 100%
+  );
+  border-color: #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.spatial-btn.active {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 255, 0.4) 0%,
+    rgba(255, 0, 255, 0.4) 100%
+  );
+  border-color: #ff00ff;
+  color: #ff00ff;
+  box-shadow: 0 0 25px rgba(255, 0, 255, 0.6),
+    inset 0 0 25px rgba(255, 0, 255, 0.2);
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.8);
+}
+
+/* 图表容器 */
+.spatial-chart-container {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(26, 26, 46, 0.3) 100%
+  );
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 30px;
+  min-height: 600px;
+  box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+  overflow: visible;
+  position: relative;
+}
+
+/* 单图显示 */
+.spatial-image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+  max-width: 100%;
+  max-height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(26, 26, 46, 0.2) 100%
+  );
+  border-radius: 12px;
+}
+
+.spatial-image-container img {
+  max-width: calc(100% - 60px);
+  max-height: calc(100% - 60px);
+  width: auto;
+  height: auto;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.spatial-image-container img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+/* 网格总览 */
+.spatial-grid-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  padding: 25px;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(26, 26, 46, 0.2) 100%
+  );
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+}
+
+.spatial-grid-item {
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.6) 0%,
+    rgba(15, 52, 96, 0.4) 100%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.spatial-grid-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.3s ease;
+}
+
+.spatial-grid-item:hover::before {
+  left: 100%;
+}
+
+.spatial-grid-item:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 46, 0.8) 0%,
+    rgba(15, 52, 96, 0.6) 100%
+  );
+  border-color: #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4),
+    inset 0 0 15px rgba(0, 255, 255, 0.1);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.spatial-grid-item img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+
+.spatial-grid-item img:hover {
+  border-color: #00ffff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.3);
+  transform: scale(1.02);
+}
+
+.spatial-grid-item p {
+  margin-top: 12px;
+  margin-bottom: 0;
+  color: #4ecdc4;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "Rajdhani", sans-serif;
+  text-shadow: 0 0 5px rgba(78, 205, 196, 0.4);
+  position: relative;
+  z-index: 2;
+}
+
+.spatial-grid-item p:hover {
+  color: #00ffff;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+/* 分析内容样式 - 与主页面chart-analysis保持一致 */
+.spatial-analysis-container {
+  padding: 40px 50px 35px 50px;
+  color: #e0e0e0;
+  line-height: 1.8;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(26, 26, 46, 0.2) 100%
+  );
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.spatial-analysis-container p {
+  margin-bottom: 1.2em;
+  text-indent: 2em;
+  color: #e0e0e0;
+  font-size: 1.15rem;
+  line-height: 1.8;
+}
+
+.spatial-analysis-container h2 {
+  color: #00ffff;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  text-align: center;
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.spatial-analysis-container h3 {
+  color: #ff6b6b;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  text-align: left;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  text-shadow: 0 0 5px rgba(255, 107, 107, 0.4);
+}
+
+.spatial-analysis-container h4 {
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-size: 1.08rem;
+  color: #1e293b;
+}
+
+.spatial-analysis-container ul {
+  margin: 16px 0 16px 28px;
+  padding-left: 0;
+}
+
+.spatial-analysis-container li {
+  margin-bottom: 8px;
+  color: #1a202c;
+  font-size: 1.12rem;
+}
+
+/* 视图切换 */
+.spatial-view {
+  display: none;
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.spatial-view.active {
+  display: block;
+}
+
+/* 趋势分析视图特殊样式 */
+.spatial-analysis-view {
+  height: auto;
+  overflow: visible;
+}
+
+/* 航线总览视图特殊样式 */
+.spatial-overview-view {
+  max-height: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 单图显示视图特殊样式 */
+.spatial-single-view {
+  max-height: 800px;
+  overflow: hidden;
+}
+
+/* 响应式设计 */
+@media (min-width: 1200px) {
+  .spatial-grid-container {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .spatial-grid-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .spatial-grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .spatial-controls {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .spatial-btn-group {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .spatial-btn {
+    flex: 1;
+    min-width: 70px;
+    max-width: 120px;
+  }
+
+  .spatial-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 15px;
+  }
+
+  .spatial-chart-container {
+    min-height: 400px;
+  }
+
+  /* 移动端的趋势分析视图不限制高度 */
+  .spatial-analysis-view {
+    height: auto;
+    max-height: none;
+  }
+
+  /* 移动端的总览视图限制高度 */
+  .spatial-overview-view {
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  /* 移动端的单图视图限制高度 */
+  .spatial-single-view {
+    max-height: 600px;
+  }
+
+  .spatial-image-container {
+    padding: 15px;
+  }
+
+  .spatial-image-container img {
+    max-width: calc(100% - 30px);
+    max-height: calc(100% - 30px);
+  }
+}
