@@ -72,16 +72,18 @@
     .domain(countries)
     .range(countries.map((d, i) => d3.interpolateCool(i / (countries.length - 1))));
 
-  // Tooltip
+  // tooltip
   const tooltip = d3
     .select("body")
     .append("div")
     .attr("class", "stacked-tooltip")
     .style("position", "absolute")
-    .style("background", "rgba(255,255,255,0.95)")
-    .style("border", "1px solid #ccc")
-    .style("padding", "8px 12px")
-    .style("border-radius", "4px")
+    .style("background", "rgba(20, 30, 60, 0.97)") // 深蓝色背景
+    .style("color", "#fff") // 白色文字
+    .style("border", "2px solid #3af") // 蓝色边框
+    .style("box-shadow", "0 0 16px #3af, 0 0 4px #fff inset") // 发光效果
+    .style("padding", "10px 16px")
+    .style("border-radius", "8px")
     .style("pointer-events", "none")
     .style("font-size", "16px")
     .style("display", "none")
